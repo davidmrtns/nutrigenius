@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+  Cadastrar-se
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="">
+        {{ form_criar_conta.csrf_token }}
+        <legend>Criar conta</legend>
+        <fieldset>
+            {{ form_criar_conta.nome.label }}
+            {% if form_criar_conta.nome.errors %}
+                {{ form_criar_conta.nome }}
+                {% for erro in form_criar_conta.nome %}
+                    {{ erro }}
+                {% endfor %}
+            {% else %}
+                {{ form_criar_conta.nome }}
+            {% endif %}
+
+            {{ form_criar_conta.email.label }}
+            {% if form_criar_conta.email.errors %}
+                {{ form_criar_conta.email }}
+                {% for erro in form_criar_conta.email %}
+                    {{ erro }}
+                {% endfor %}
+            {% else %}
+                {{ form_criar_conta.email }}
+            {% endif %}
+
+            {{ form_criar_conta.senha.label }}
+            {% if form_criar_conta.senha.errors %}
+                {{ form_criar_conta.senha }}
+                {% for erro in form_criar_conta.senha %}
+                    {{ erro }}
+                {% endfor %}
+            {% else %}
+                {{ form_criar_conta.senha }}
+            {% endif %}
+
+            {{ form_criar_conta.confirmacao.label }}
+            {% if form_criar_conta.confirmacao.errors %}
+                {{ form_criar_conta.confirmacao }}
+                {% for erro in form_criar_conta.confirmacao %}
+                    {{ erro }}
+                {% endfor %}
+            {% else %}
+                {{ form_criar_conta.confirmacao }}
+            {% endif %}
+        </fieldset>
+        {{ form_criar_conta.botao_submit_criar_conta }}
+    </form>
+{% endblock %}
