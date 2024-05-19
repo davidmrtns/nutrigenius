@@ -9,12 +9,18 @@
         {{ form_criar_receita.csrf_token }}
         <legend>Criar receita</legend>
         <fieldset>
-            {{ form_criar_receita.ingredientes }}
+            {% for campo in form_criar_receita.ingredientes %}
+                {{ campo }}
+            {% endfor %}
             {{ form_criar_receita.calorias.label }}
             {{ form_criar_receita.calorias }}
         </fieldset>
         {{ form_criar_receita.botao_submit_criar_receita }}
     </form>
+
+    <a href="{{ url_for('criar_receita', num_entradas=form_criar_receita.ingredientes.min_entries - 1) }}">-</a>
+    <p>{{form_criar_receita.ingredientes.min_entries}} ingredientes</p>
+    <a href="{{ url_for('criar_receita', num_entradas=form_criar_receita.ingredientes.min_entries + 1) }}">+</a>
 
     {% if receita %}
         <h1>{{ receita.nome_receita }}</h1>

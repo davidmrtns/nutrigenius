@@ -1,13 +1,11 @@
-import json
-
 import openai
 from flask import render_template, request, redirect, url_for, session
 from flask_login import login_user, login_required, logout_user, current_user
-
 from .forms import FormCriarConta, FormLogin, FormCriarReceita
 from app import database, bcrypt
 from .models import Usuario, Receita, Ingrediente, ModoPreparo
 import json
+
 
 def init_app(app):
     @app.route("/")
@@ -70,8 +68,16 @@ def init_app(app):
     @login_required
     def criar_receita(receita=None):
         form_criar_receita = FormCriarReceita()
+        num_entradas = request.args.get('num_entradas', default=3, type=int)
+        if num_entradas >= 3:
+            if num_entradas > 20:
+                num_entradas = 20
+            form_criar_receita.ingredientes.min_entries = num_entradas
+            if len(form_criar_receita.ingredientes.entries) < num_entradas:
+                for _ in range(num_entradas - len(form_criar_receita.ingredientes.entries)):
+                    form_criar_receita.ingredientes.append_entry()
         if not receita and form_criar_receita.validate_on_submit() and 'botao_submit_criar_receita' in request.form:
-            itens = [ingrediente.data for ingrediente in form_criar_receita.ingredientes]
+            itens = [ingrediente.ingrediente.data for ingrediente in form_criar_receita.ingredientes]
             ingredientes = ', '.join(itens)
             messages = [{"role": "system",
                          "content": f"Gere um dicionário Python de uma receita fitness de {form_criar_receita.calorias.data} calorias e usando os seguintes ingredientes: {ingredientes}. Devolva como resultado apenas o dicionário Pyhton, com as chaves 'nome_receita' e 'rendimento' (que deverão ser strings), calorias (que deve ser um número inteiro) e 'ingredientes' e 'modo_preparo' (que deverão ser listas contendo individualmente cada item). Separe tudo apenas por espaços únicos, não use quebras de linha ou indentação e não numere os passos do modo de preparo"}]
