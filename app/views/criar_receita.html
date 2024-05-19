@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Criar receita
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="">
+        {{ form_criar_receita.csrf_token }}
+        <legend>Criar receita</legend>
+        <fieldset>
+            {{ form_criar_receita.ingredientes }}
+            {{ form_criar_receita.calorias.label }}
+            {{ form_criar_receita.calorias }}
+        </fieldset>
+        {{ form_criar_receita.botao_submit_criar_receita }}
+    </form>
+
+    {% if receita %}
+        <h1>{{ receita.nome_receita }}</h1>
+        <p>{{ receita.calorias }} calorias</p>
+        <h3>Ingredientes</h3>
+        <ul>
+            {% for ingrediente in receita.ingredientes %}
+                <li>{{ ingrediente }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Modo de preparo</h3>
+        <ol>
+            {% for passo in receita.modo_preparo %}
+                <li>{{ passo }}</li>
+            {% endfor %}
+        </ol>
+        <h3>Rendimento</h3>
+        <p>{{ receita.rendimento }}</p>
+        <a href="{{ url_for('salvar_receita') }}">Salvar receita</a>
+        <a href="{{ url_for('regerar_receita') }}">Gerar a receita novamente</a>
+    {% endif %}
+{% endblock %}

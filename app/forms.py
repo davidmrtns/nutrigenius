@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, EmailField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, EmailField, BooleanField, DecimalField, FieldList
+from wtforms.fields.form import FormField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 from .models import Usuario
 from flask_login import current_user
 
@@ -24,4 +25,15 @@ class FormLogin(FlaskForm):
     senha = PasswordField("Senha", validators=[DataRequired(), Length(8, 20)])
     lembrar_dados = BooleanField("Lembrar meus dados de acesso")
     botao_submit_login = SubmitField("Fazer login")
+
+
+class FormCriarReceita(FlaskForm):
+    ingredientes = FieldList(StringField("Ingrediente"), min_entries=3)
+    calorias = DecimalField("Calorias", validators=[DataRequired(), NumberRange(min=0)])
+    botao_submit_criar_receita = SubmitField("Gerar receita")
+
+    '''def __init__(self, entradas=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if entradas:
+            self.ingredientes = FieldList(StringField("Ingrediente"), min_entries=entradas)'''
 

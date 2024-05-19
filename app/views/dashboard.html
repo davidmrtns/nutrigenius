@@ -5,5 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <p>Dashboard</p>
+    <h1>Dashboard</h1>
+    <a href="{{ url_for('criar_receita') }}">Criar receita</a>
+    <h3>Receitas</h3>
+    {% if receitas %}
+        <ul>
+            {% for receita in receitas %}
+                <li><a href="{{ url_for('ver_receita', id_receita=receita.id) }}">{{ receita.nome }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você ainda não criou nenhuma receita</p>
+    {% endif %}
 {% endblock %}

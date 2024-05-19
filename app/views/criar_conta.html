@@ -12,7 +12,7 @@
             {{ form_criar_conta.nome.label }}
             {% if form_criar_conta.nome.errors %}
                 {{ form_criar_conta.nome }}
-                {% for erro in form_criar_conta.nome %}
+                {% for erro in form_criar_conta.nome.errors %}
                     {{ erro }}
                 {% endfor %}
             {% else %}
@@ -22,7 +22,7 @@
             {{ form_criar_conta.email.label }}
             {% if form_criar_conta.email.errors %}
                 {{ form_criar_conta.email }}
-                {% for erro in form_criar_conta.email %}
+                {% for erro in form_criar_conta.email.errors %}
                     {{ erro }}
                 {% endfor %}
             {% else %}
@@ -32,7 +32,7 @@
             {{ form_criar_conta.senha.label }}
             {% if form_criar_conta.senha.errors %}
                 {{ form_criar_conta.senha }}
-                {% for erro in form_criar_conta.senha %}
+                {% for erro in form_criar_conta.senha.errors %}
                     {{ erro }}
                 {% endfor %}
             {% else %}
@@ -42,7 +42,7 @@
             {{ form_criar_conta.confirmacao.label }}
             {% if form_criar_conta.confirmacao.errors %}
                 {{ form_criar_conta.confirmacao }}
-                {% for erro in form_criar_conta.confirmacao %}
+                {% for erro in form_criar_conta.confirmacao.errors %}
                     {{ erro }}
                 {% endfor %}
             {% else %}
