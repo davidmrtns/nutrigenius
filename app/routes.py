@@ -1,5 +1,5 @@
 import openai
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from .forms import FormCriarConta, FormLogin, FormCriarReceita
 from app import database, bcrypt
@@ -23,10 +23,13 @@ def init_app(app):
             if usuario and bcrypt.check_password_hash(usuario.senha, form_login.senha.data):
                 login_user(usuario, remember=form_login.lembrar_dados.data)
                 par_proximo = request.args.get('next')
+                flash(f'Login feito com sucesso para o e-mail {form_login.email.data}', 'alert-success')
                 if par_proximo:
                     return redirect(par_proximo)
                 else:
                     return redirect(url_for('dashboard'))
+            else:
+                flash('Falha no login. E-mail ou senha incorretos', 'alert-danger')
         return render_template("login.html", form_login=form_login)
 
 
@@ -39,6 +42,7 @@ def init_app(app):
                               senha=senha_cript)
             database.session.add(usuario)
             database.session.commit()
+            flash(f'Conta criada para o e-mail {form_criar_conta.email.data}', 'alert-success')
             return redirect(url_for('login'))
         return render_template("criar_conta.html", form_criar_conta=form_criar_conta)
 
