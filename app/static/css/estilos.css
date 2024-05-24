@@ -17,6 +17,11 @@ nav.navbar a.nav-link{
     font-size: 1.3em;
 }
 
+div.container-conteudo{
+    display: flex;
+    justify-content: space-between;
+}
+
 div.section-content{
     padding: 6%;
     font-size: 20px;
@@ -43,4 +48,140 @@ a.cta-button{
     color: black;
     text-decoration: none;
     margin: 20px 0;
+}
+
+form div.form-group .ingrediente td{
+    width: 100%;
+}
+
+form div.form-group .ingrediente input{
+    border: 0;
+    border-bottom: 1px solid #d6d6d6;
+    margin-left: 5px;
+    width: 100%;
+    outline: none;
+}
+
+div.container-dashboard{
+    display: flex;
+}
+
+div.criar-receita{
+    width: 30%;
+}
+
+div.criar-receita h3{
+    font-size: 2.5em;
+}
+
+div.criar-receita a.btn.btn-warning{
+    font-size: 18px;
+}
+
+div.container-receitas{
+    width: 70%;
+    padding: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+div.container-receitas a.btn.btn-success{
+    background: #70bd3a;
+    color: black;
+}
+
+div.container-receitas a.btn.btn-success:hover{
+    background: #beec9f;
+    transition: 0.3s;
+}
+
+div.container-receitas::-webkit-scrollbar {
+  width: 5px;
+}
+
+div.container-receitas::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+div.container-receitas::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+div.container-receitas::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+img.decorator{
+    width: 552px;
+}
+
+footer span.brand{
+    font-weight: bold;
+    font-family: "Luckiest Guy", cursive;
+}
+
+@media screen and (max-width: 1250px), (max-device-width: 1250px) {
+    img.main-image{
+        width: 100%;
+    }
+
+    div.section-content{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1050px), (max-device-width: 1050px) {
+    div.criar-receita h3{
+        font-size: 1.7em;
+    }
+
+    div.container-receitas{
+        width: 65%;
+    }
+
+    div.criar-receita{
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 850px), (max-device-width: 850px) {
+    img.main-image{
+        max-width: 550px;
+    }
+
+    img.decorator{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 750px), (max-device-width: 750px) {
+    div.section-content, div.criar-receita, div.container-receitas{
+        width: 100%;
+    }
+
+    img.main-image{
+        max-width: unset;
+        margin-bottom: 10px;
+    }
+
+    div.container-conteudo, div.container-dashboard{
+        flex-direction: column !important;
+    }
+
+    div.criar-receita{
+        margin-bottom: 20px;
+    }
+
+    div.criar-receita img{
+        width: 47%;
+    }
+
+    div.container-receitas{
+        height: unset;
+        overflow-y: unset;
+    }
+
+    footer img{
+        display: none;
+    }
 }

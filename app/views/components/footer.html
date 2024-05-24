@@ -1,0 +1,14 @@
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 border-top">
+        <p class="col-md-4 mb-0 text-muted">© 2024 <span class="brand">Nutrigenius</span></p>
+
+        <a href="{{ url_for('inicio') }}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img src="{{ url_for('static', filename='images/nutrigenius-colorido.svg') }}" width="35px" />
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="{{ url_for('dashboard') }}" class="nav-link px-2 text-muted">Minhas receitas</a></li>
+            <li class="nav-item"><a href="{{ url_for('criar_receita') }}" class="nav-link px-2 text-muted">Criar receita</a></li>
+        </ul>
+    </footer>
+</div>

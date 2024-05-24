@@ -76,10 +76,13 @@ def init_app(app):
         if num_entradas >= 3:
             if num_entradas > 20:
                 num_entradas = 20
+                flash('Sua receita não pode ter mais do que 20 ingredientes', 'alert-info')
             form_criar_receita.ingredientes.min_entries = num_entradas
             if len(form_criar_receita.ingredientes.entries) < num_entradas:
                 for _ in range(num_entradas - len(form_criar_receita.ingredientes.entries)):
                     form_criar_receita.ingredientes.append_entry()
+        else:
+            flash('Sua receita deve ter ao menos 3 ingredientes', 'alert-info')
         if not receita and form_criar_receita.validate_on_submit() and 'botao_submit_criar_receita' in request.form:
             itens = [ingrediente.ingrediente.data for ingrediente in form_criar_receita.ingredientes]
             ingredientes = ', '.join(itens)

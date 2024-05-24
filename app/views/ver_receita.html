@@ -6,24 +6,40 @@
 
 {% block body %}
     {% if receita %}
-        <h1>{{ receita.nome }}</h1>
-        <p>{{ receita.calorias }} calorias</p>
-        <h3>Ingredientes</h3>
-        <ul>
-            {% for ingrediente in receita.ingredientes %}
-                <li>{{ ingrediente.nome }}</li>
-            {% endfor %}
-        </ul>
-        <h3>Modo de preparo</h3>
-        <ol>
-            {% for passo in receita.modo_preparo %}
-                <li>{{ passo.passo }}</li>
-            {% endfor %}
-        </ol>
-        <h3>Rendimento</h3>
-        <p>{{ receita.rendimento }}</p>
-        <a href="{{ url_for('excluir_receita', id_receita=receita.id) }}">Excluir receita</a>
+        <h1 class="text-center">{{ receita.nome }}</h1>
+        <p class="text-center">{{ receita.calorias }} calorias</p>
+        <div class="card mx-4">
+            <h5 class="card-header">Ingredientes</h5>
+            <div class="card-body">
+                <ul>
+                    {% for ingrediente in receita.ingredientes %}
+                        <li>{{ ingrediente.nome }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="card mx-4 mt-4">
+            <h5 class="card-header">Modo de preparo</h5>
+            <div class="card-body">
+                <ol>
+                    {% for passo in receita.modo_preparo %}
+                        <li>{{ passo.passo }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <div class="card mx-4 mt-4">
+            <h5 class="card-header">Rendimento</h5>
+            <div class="card-body">
+                <p class="card-text">{{ receita.rendimento }}</p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end p-4 gap-2">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary"><i class="fa-solid fa-left-long"></i> Voltar</a>
+            <a href="{{ url_for('excluir_receita', id_receita=receita.id) }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Excluir receita</a>
+        </div>
     {% else %}
-        <p>Essa receita não foi encontrada</p>
+        <p class="text-center mt-4">Essa receita não foi encontrada</p>
     {% endif %}
+    {% include 'components/footer.html' %}
 {% endblock %}
