@@ -141,4 +141,5 @@ def init_app(app):
         if receita:
             database.session.delete(receita)
             database.session.commit()
+            flash('A receita foi excluída', 'alert-danger')
         return redirect(url_for('dashboard'))
